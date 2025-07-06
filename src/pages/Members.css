@@ -1,0 +1,66 @@
+.members-container {
+  padding: 20px;
+}
+
+.members-container h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+}
+.member-email {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px;
+}
+.member-card {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  position: relative;
+}
+
+.member-name {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.member-label {
+  font-size: 0.9rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #eee;
+  color: #555;
+}
+
+.member-card.creator {
+  background: #e3f2fd;
+  border: 2px solid #90caf9;
+}
+
+.member-card.creator .member-label {
+  background: #90caf9;
+  color: white;
+}
+
+.member-card.self {
+  background: #f1f8e9;
+  border: 2px solid #aed581;
+}
+
+.member-card.self .member-label {
+  background: #aed581;
+  color: white;
+}

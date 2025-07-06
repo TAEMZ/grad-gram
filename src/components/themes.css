@@ -1,0 +1,71 @@
+/* === DARK MODE GLOBAL === */
+body.dark-mode {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+body.dark-mode .room-container {
+  background: #181818;
+}
+
+body.dark-mode .rooms-sidebar {
+  background: #222;
+  border-right: 1px solid #444;
+}
+
+body.dark-mode .room-info-header {
+  background: #333;
+}
+
+body.dark-mode .room-info-header h3,
+body.dark-mode .room-info-header p,
+body.dark-mode .key-label,
+body.dark-mode .key-value,
+body.dark-mode .key-instruction {
+  color: #ddd;
+}
+
+body.dark-mode .sidebar-nav .nav-btn {
+  background: #333;
+  color: #ddd;
+}
+
+body.dark-mode .sidebar-nav .nav-btn:hover {
+  background: #444;
+}
+
+body.dark-mode .sidebar-nav .nav-btn.active {
+  background: #81c784;
+  color: white;
+}
+
+body.dark-mode .logout-btn {
+  background: #c62828;
+}
+
+body.dark-mode .logout-btn:hover {
+  background: #b71c1c;
+}
+
+body.dark-mode .room-header {
+  background: linear-gradient(135deg, #333, #222);
+  color: white;
+}
+
+body.dark-mode .post-card {
+  background: #2a2a2a;
+  color: #ddd;
+}
+
+body.dark-mode .post-message {
+  color: #e0e0e0;
+}
+
+body.dark-mode .post-footer {
+  color: #bbb;
+}
+
+body.dark-mode .emoji-btn,
+body.dark-mode .icon-btn {
+  color: #ddd;
+}

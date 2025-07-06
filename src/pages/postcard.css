@@ -1,0 +1,242 @@
+.post-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(183, 85, 85, 0.1);
+  overflow: hidden;
+  width: 510px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+}
+
+.post-image-dual {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  max-height: 600px;
+  overflow: auto;
+}
+
+.post-image-dual img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+ 
+}
+
+
+.post-image:hover img {
+  transform: scale(1.05);
+   box-shadow: #fa0501;
+}
+
+.post-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-message {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: 4px;
+  color: #e3d671;
+  line-height: 1.5;
+  min-height: 60px;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.post-author {
+  font-weight: 500;
+  color: #444;
+}
+
+.action-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.post-card:hover .action-buttons,
+.action-buttons:focus-within,
+.action-buttons:hover {
+  opacity: 1;
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.edit-btn {
+  color: #1976d2;
+}
+
+.edit-btn:hover {
+  background: #1976d2;
+  color: white;
+  transform: scale(1.1);
+}
+
+.delete-btn {
+  color: #e53935;
+}
+
+.delete-btn:hover {
+  background: #e53935;
+  color: white;
+  transform: scale(1.1);
+}
+
+.reactions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.emoji-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  padding: 4px 8px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+}
+
+.emoji-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.emoji-btn.active {
+  transform: scale(1.1);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.emoji-count {
+  font-size: 0.8rem;
+  color: #555;
+}
+/* Updated CSS for the image gallery */
+.post-image-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.post-image-dual {
+  display: flex;
+  transition: transform 0.3s ease;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.post-image-dual::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+.post-image-dual img {
+  scroll-snap-align: start;
+  flex: 0 0 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.post-image-container:hover .nav-arrow {
+  opacity: 1;
+}
+
+.nav-arrow.left {
+  left: 10px;
+}
+
+.nav-arrow.right {
+  right: 10px;
+}
+
+.nav-arrow:disabled {
+  opacity: 0;
+  cursor: default;
+}
+
+.dots-container {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: rgba(255, 255, 255, 0.95);
+  transform: scale(1.2);
+}
