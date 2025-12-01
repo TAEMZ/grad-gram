@@ -10,7 +10,7 @@ Built with **React + Firebase**, GradGram provides an intuitive interface and se
 
 | Home Page                                                                                                       | Post List                                                                                                           | Room Chat                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| ![Home](./src/assets/img1.png)| ![PostList](./src/assets/img2)| ![Room](./src/assets/img1.png) |
+| ![Home](./src/assets/img1.png)| ![PostList](./src/assets/img2.png)| ![Room](./src/assets/img3.png) |
 
 
 ---
