@@ -10,9 +10,7 @@ Built with **React + Firebase**, GradGram provides an intuitive interface and se
 
 | Home Page                                                                                                       | Post List                                                                                                           | Room Chat                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| ![Home](https://raw.githubusercontent.com/TAEMZ/grad_gram/main/src/assets/img1.png)
-| ![PostList](https://raw.githubusercontent.com/TAEMZ/grad_gram/main/src/assets/img2.png)
-| ![Room](https://raw.githubusercontent.com/TAEMZ/grad_gram/main/src/assets/img3.png) |
+| ![Home](grad_gram/main/src/assets/img1.png)| ![PostList](https://raw.githubusercontent.com/TAEMZ/grad_gram/main/src/assets/img2.png)| ![Room](https://raw.githubusercontent.com/TAEMZ/grad_gram/main/src/assets/img3.png) |
 
 
 ---
