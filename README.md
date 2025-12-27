@@ -6,16 +6,13 @@ A cinematic, digital yearbook platform for preserving graduation memories.
 
 -   **Cinematic "Midnight" Aesthetic**: Premium dark mode with gold accents and glassmorphism.
 -   **Room-Based Memories**: Create private rooms for your university department or friend group.
--   **Graduation Themed UI**:
-    -   🎓 Cap-shaped buttons
-    -   📜 Diploma-style room cards
-    -   🎭 Curtain entrance animations
+    
 -   **Interactive Widgets**:
     -   Countdown to Commencement
-    -   Daily Wisdom Quotes
+    -   Daily  Quotes
     -   Rolling Credits ("Roll Call")
     -   Senior Superlatives ("Awards")
--   **PostCard**: Instagram-style posting with reactions, comments, and "First Post" badges.
+-   
 
 ## Tech Stack
 
@@ -29,7 +26,7 @@ A cinematic, digital yearbook platform for preserving graduation memories.
 This project was refined to include:
 -   A responsive masonry grid for posts.
 -   Real-time data integration for class members.
--   A polished, "sellable" product UI.
+
 
 ## Getting Started
 
