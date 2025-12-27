@@ -1,0 +1,62 @@
+.rollcall-container {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.rollcall-header {
+    text-align: center;
+    margin-bottom: 40px;
+    z-index: 10;
+}
+
+.rollcall-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.credits-wrapper {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    perspective: 400px;
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+.credits-scroll {
+    text-align: center;
+    animation: scrollUp 40s linear infinite;
+    transform: rotateX(20deg);
+}
+
+.credit-item {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 24px 0;
+    font-weight: 600;
+}
+
+.credit-item.highlight {
+    color: var(--accent-gold);
+    font-size: 2.5rem;
+    margin-top: 60px;
+}
+
+@keyframes scrollUp {
+    0% {
+        transform: rotateX(20deg) translateY(100%);
+    }
+
+    100% {
+        transform: rotateX(20deg) translateY(-200%);
+    }
+}

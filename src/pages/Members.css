@@ -14,17 +14,19 @@
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 15px;
 }
+
 .member-email {
   display: block;
   font-size: 0.8rem;
   color: #666;
   margin-top: 4px;
 }
+
 .member-card {
   background: #ffffff;
   padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
 }
@@ -43,6 +45,14 @@
   border-radius: 4px;
   background: #eee;
   color: #555;
+}
+
+.member-next-chapter {
+  display: block;
+  font-size: 0.85rem;
+  color: hsl(var(--accent-primary));
+  font-weight: 600;
+  margin: 6px 0;
 }
 
 .member-card.creator {

@@ -269,10 +269,18 @@ function Dashboard() {
     );
   };
 
+  // Add this helper for a cinematic greeting
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good Morning";
+    if (hour < 18) return "Good Afternoon";
+    return "Good Evening";
+  };
+
   return (
     <div className="dashboard-container">
       {/* Burger button */}
-      <button className="burger-btn" onClick={toggleSidebar}>
+      <button className={`burger-btn ${sidebarOpen ? "open" : ""}`} onClick={toggleSidebar}>
         <span className="burger-line"></span>
         <span className="burger-line"></span>
         <span className="burger-line"></span>
@@ -281,33 +289,31 @@ function Dashboard() {
       {/* Sidebar */}
       <aside className={`rooms-sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="sidebar-header">
-          <h2>My Rooms</h2>
+          <h2 className="gradient-text">GradGram</h2>
           <p className="welcome-message">
-            Welcome back, {auth.currentUser.displayName || "friend"}!
+            {getGreeting()}, {auth.currentUser.displayName || "Explorer"}
           </p>
         </div>
 
         <div className="sidebar-content">
           <div className="sidebar-section">
-            <h3 className="section-title">
-              <span className="icon">🏠</span> Created Rooms
-            </h3>
+            <h3 className="section-title">Created Rooms</h3>
             {createdRooms.length > 0 ? (
               <ul className="room-list">
                 {createdRooms.map((room) => (
                   <li key={room.id} className="room-item">
                     <div className="room-info">
                       <span className="room-name">
-                        {room.university} - {room.department}
+                        {room.university}
                       </span>
-                      <small className="room-id">{room.id}</small>
+                      <small className="room-id">{room.department}</small>
                     </div>
                     <div className="room-actions">
                       <button
                         onClick={() => navigate(`/room/${room.id}`)}
                         className="action-btn primary"
                       >
-                        Open
+                        Enter
                       </button>
                       <button
                         onClick={() => handleDeleteRoom(room.id)}
@@ -320,32 +326,30 @@ function Dashboard() {
                 ))}
               </ul>
             ) : (
-              <p className="empty-message">You haven't created any rooms yet</p>
+              <p className="empty-message">No rooms created yet</p>
             )}
           </div>
 
-          <div className="divider"></div>
+          <div style={{ margin: '24px 0', borderTop: '1px solid var(--glass-border)' }}></div>
 
           <div className="sidebar-section">
-            <h3 className="section-title">
-              <span className="icon">👥</span> Joined Rooms
-            </h3>
+            <h3 className="section-title">Joined Rooms</h3>
             {joinedRooms.length > 0 ? (
               <ul className="room-list">
                 {joinedRooms.map((room) => (
                   <li key={room.id} className="room-item">
                     <div className="room-info">
                       <span className="room-name">
-                        {room.university} - {room.department}
+                        {room.university}
                       </span>
-                      <small className="room-id">{room.id}</small>
+                      <small className="room-id">{room.department}</small>
                     </div>
                     <div className="room-actions">
                       <button
                         onClick={() => navigate(`/room/${room.id}`)}
                         className="action-btn primary"
                       >
-                        Open
+                        Enter
                       </button>
                       <button
                         onClick={() => handleLeaveRoom(room.id)}
@@ -358,72 +362,75 @@ function Dashboard() {
                 ))}
               </ul>
             ) : (
-              <p className="empty-message">You haven't joined any rooms yet</p>
+              <p className="empty-message">No joined rooms yet</p>
             )}
           </div>
         </div>
 
         <div className="sidebar-footer">
           <button onClick={handleLogout} className="logout-btn">
-            <span className="logout-icon">🚪</span> Sign Out
+            Sign Out
           </button>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="dashboard-content">
+      <main className="dashboard-content animate-fade-in">
         <section className="welcome-section">
-          <h1>Welcome to GradGram</h1>
+          <h1>{getGreeting()}, <span className="gradient-text">{auth.currentUser.displayName?.split(' ')[0] || "Friend"}</span></h1>
           <p className="welcome-text">
-            Connect with your classmates, share memories, and create lasting
-            digital yearbooks together.
+            Connect with your classmates and preserve your graduation memories in a cinematic digital space.
           </p>
           <div className="decorative-line"></div>
         </section>
+
         <section className="search-section">
           <h3>Find Classmates</h3>
+          <div className="department-filters">
+            {["All", "Engineering", "Arts", "Science", "Business"].map(dept => (
+              <button key={dept} className="dept-filter-btn" onClick={() => setSearchQuery(dept === "All" ? "" : dept)}>
+                {dept}
+              </button>
+            ))}
+          </div>
           <form onSubmit={handleSearch} className="search-form">
             <input
               type="text"
-              placeholder="Search classmates by name..."
+              placeholder="Search rooms or departments..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button type="submit" disabled={isSearching}>
-              {isSearching ? (
-                <>
-                  <span className="spinner"></span> Searching...
-                </>
-              ) : (
-                "Search"
-              )}
+            <button type="submit" className="search-btn-simple" disabled={isSearching} title="Search Rooms">
+              🔍
             </button>
           </form>
           {searchResults.length === 0 && !isSearching && searchQuery && (
             <div className="empty-results">
-              No posts found matching your search
+              No classmates found
             </div>
           )}
-          {searchResults.map((post) => {
-            const userEmoji = post.reactions?.[uid] || "";
-            const counts = { "👍": 0, "❤️": 0, "😂": 0, "😢": 0 };
-            Object.values(post.reactions || {}).forEach((e) => {
-              if (counts[e] !== undefined) counts[e]++;
-            });
+          <div className="search-results-grid" style={{ marginTop: '2rem' }}>
+            {searchResults.map((post) => {
+              const userEmoji = post.reactions?.[uid] || "";
+              const counts = { "👍": 0, "❤️": 0, "😂": 0, "😢": 0 };
+              Object.values(post.reactions || {}).forEach((e) => {
+                if (counts[e] !== undefined) counts[e]++;
+              });
 
-            return (
-              <PostCard
-                key={post.id}
-                post={post}
-                userEmoji={userEmoji}
-                emojiCounts={counts}
-                canEdit={post.authorId === uid}
-                onReact={(emoji) => handleReact(post.roomId, post.id, emoji)}
-                onDelete={null}
-                onEdit={() => {}}
-              />
-            );
-          })}
+              return (
+                <PostCard
+                  key={post.id}
+                  post={post}
+                  userEmoji={userEmoji}
+                  emojiCounts={counts}
+                  canEdit={post.authorId === uid}
+                  onReact={(emoji) => handleReact(post.roomId, post.id, emoji)}
+                  onDelete={null}
+                  onEdit={() => { }}
+                />
+              );
+            })}
+          </div>
         </section>
         <section className="action-section">
           <div className="action-card">

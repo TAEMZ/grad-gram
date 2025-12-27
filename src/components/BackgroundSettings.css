@@ -1,0 +1,96 @@
+.background-settings-panel {
+    margin-top: 24px;
+    padding: 24px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+}
+
+.settings-group {
+    margin-bottom: 24px;
+}
+
+.settings-label {
+    font-size: 0.8rem;
+    color: hsl(var(--text-secondary));
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.color-presets {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.color-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.color-dot:hover {
+    transform: scale(1.15);
+}
+
+.color-dot.active {
+    border-color: white;
+    box-shadow: 0 0 0 2px hsl(var(--accent-primary));
+    transform: scale(1.1);
+}
+
+.custom-color-wrapper {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--glass-border);
+    cursor: pointer;
+    background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+}
+
+.color-input {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+.image-upload-trigger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 1px dashed var(--glass-border);
+    border-radius: 12px;
+    cursor: pointer;
+    color: hsl(var(--text-secondary));
+    transition: all 0.2s;
+    background: hsla(255, 255, 255, 0.02);
+    text-align: center;
+}
+
+.image-upload-trigger:hover {
+    background: var(--glass-bg);
+    color: white;
+    border-color: hsl(var(--accent-primary));
+}
+
+.upload-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+}

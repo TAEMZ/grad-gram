@@ -31,10 +31,15 @@ export default function Members({ roomId }) {
           const userSnap = await getDoc(doc(db, "users", uid));
           const data = userSnap.data() || {};
 
+          // Mock "Next Chapter" data for demo - in real app, fetch from user profile
+          const destinations = ["Google", "Stanford", "Travel", "Startup", "Undecided", "Amazon", "Gap Year"];
+          const randomDest = destinations[Math.floor(Math.random() * destinations.length)];
+
           return {
             uid,
             displayName: data.displayName || "Anonymous",
             email: data.email || "",
+            nextChapter: randomDest
           };
         })
       );
@@ -52,12 +57,12 @@ export default function Members({ roomId }) {
         {members.map((m) => (
           <div
             key={m.uid}
-            className={`member-card ${
-              m.uid === creatorId ? "creator" : m.uid === me ? "self" : ""
-            }`}
+            className={`member-card ${m.uid === creatorId ? "creator" : m.uid === me ? "self" : ""
+              }`}
           >
             <span className="member-name">{m.displayName}</span>
             <span className="member-email">{m.email}</span>
+            <span className="member-next-chapter">🔜 {m.nextChapter}</span>
             <span className="member-label">
               {m.uid === creatorId ? "Creator" : m.uid === me ? "You" : ""}
             </span>

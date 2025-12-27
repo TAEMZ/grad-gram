@@ -1,0 +1,103 @@
+.awards-container {
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.awards-title {
+    font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(to right, #fff, hsl(var(--accent-gold)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+
+.awards-subtitle {
+    color: hsl(var(--text-secondary));
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+.categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 48px;
+}
+
+.category-btn {
+    background: hsla(0, 0%, 100%, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: linear-gradient(135deg, hsl(var(--accent-primary)), hsl(var(--accent-secondary)));
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px hsla(var(--accent-primary) / 0.4);
+}
+
+.nominees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+}
+
+.nominee-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    background: var(--glass-bg);
+}
+
+.nominee-avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 16px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.nominee-name {
+    color: white;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.vote-count {
+    color: var(--accent-gold);
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.vote-btn {
+    width: auto;
+    padding: 8px 32px;
+    background: transparent;
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+.vote-btn:hover {
+    background: var(--accent-gold);
+    color: black;
+}

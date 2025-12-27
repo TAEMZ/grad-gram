@@ -49,39 +49,23 @@ export default function PostList({
     onDelete?.();
   };
 
-  const backgroundStyle =
-    background?.type === "image"
-      ? {
-          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${background.value})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-        }
-      : {
-          backgroundColor: background?.value || "#f8f9fa",
-        };
-
   return (
-    <div className="postlist-container" style={backgroundStyle}>
+    <div className="postlist-container">
       {posts.length === 0 && showPlaceholder ? (
-        <div className="empty-state-container">
-          <h2 className="empty-title">Welcome to Your Creative Space!</h2>
+        <div className="empty-state-container animate-fade-in">
+          <div className="sparkle-icon">✨</div>
+          <h2 className="empty-title">A Silent Chapter</h2>
           <p className="empty-subtitle">
-            No posts yet. Be the first to share your thoughts!
-          </p>
-          <div className="decoration-sparkles">✨</div>
-          <p className="empty-encouragement">
-            Your words could inspire others. Start the conversation!
+            Be the first to leave your mark on this digital archive.
           </p>
         </div>
       ) : (
         <>
-          <div className="celebration-banner">
-            <h2 className="celebration-title">Amazing Contributions!</h2>
-            <p className="celebration-subtitle">
-              Congratulations on building such a vibrant community!
-            </p>
+          <div className="feed-header animate-fade-in">
+            <h2 className="feed-title">Room Memories</h2>
+            <div className="feed-stats">
+              <span>{posts.length} Stories Captured</span>
+            </div>
           </div>
 
           <div className="posts-grid">
@@ -106,14 +90,6 @@ export default function PostList({
               );
             })}
           </div>
-
-          {posts.length > 3 && (
-            <div className="congratulations-footer">
-              <div className="confetti">🎉</div>
-              <p>You've viewed all {posts.length} amazing posts!</p>
-              <div className="confetti">🎊</div>
-            </div>
-          )}
         </>
       )}
     </div>

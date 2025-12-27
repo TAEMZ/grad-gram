@@ -5,6 +5,8 @@ import { signOut } from "firebase/auth";
 import { getFirestore, doc } from "firebase/firestore";
 import Magazine from "./Magazine";
 import Members from "./Members";
+import Awards from "./Awards";
+import RollCall from "./RollCall";
 import "./roompage.css";
 import ProfileSection from "../components/ProfileSection";
 import "../components/themes.css";
@@ -12,6 +14,10 @@ import BackgroundSettings from "../components/BackgroundSettings";
 import { onSnapshot } from "firebase/firestore";
 
 function RoomPage() {
+  // ... existing code ...
+
+  // inside return statement, where tab content is rendered:
+
   const navigate = useNavigate();
   const { roomKey } = useParams();
   const [activeTab, setActiveTab] = useState("magazine");
@@ -22,16 +28,23 @@ function RoomPage() {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
   );
+  const [curtainActive, setCurtainActive] = useState(false);
 
   useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark-mode");
-      localStorage.setItem("theme", "dark");
+    // Trigger curtain animation on mount
+    setCurtainActive(true);
+    const timer = setTimeout(() => setCurtainActive(false), 2000); // Cleanup class after animation
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (roomData?.accentColor) {
+      document.documentElement.style.setProperty('--room-accent', roomData.accentColor);
+      document.documentElement.style.setProperty('--room-glow', `${roomData.accentColor}26`); // 15% opacity
     } else {
-      document.body.classList.remove("dark-mode");
-      localStorage.setItem("theme", "light");
+      document.documentElement.style.setProperty('--room-accent', 'var(--accent-primary)');
     }
-  }, [darkMode]);
+  }, [roomData]);
 
   useEffect(() => {
     const db = getFirestore();
@@ -79,46 +92,29 @@ function RoomPage() {
   }
 
   return (
-    <div className={`room-container ${darkMode ? "dark-mode" : ""}`}>
-      <button className="burger-btn" onClick={toggleSidebar}>
+    <div className={`room-container ${curtainActive ? 'curtain-active' : ''}`}>
+      {/* Curtain Transition */}
+      <div className="curtain-overlay">
+        <div className="curtain-panel"></div>
+        <div className="curtain-panel right"></div>
+      </div>
+
+      {/* Burger button */}
+      <button className={`burger-btn ${sidebarOpen ? "open" : ""}`} onClick={toggleSidebar}>
         <span className="burger-line"></span>
         <span className="burger-line"></span>
         <span className="burger-line"></span>
       </button>
 
+      {/* Sidebar */}
       <aside className={`rooms-sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="sidebar-content">
-          <div className="university-header">
-            <div className="academic-badge">
-              <h2 className="university-name">{roomData.university}</h2>
-              <p className="department-name">{roomData.department}</p>
-              <p className="motto">"Collaborate • Create • Inspire"</p>
-            </div>
+          <div className="academic-badge animate-fade-in">
+            <h2 className="university-name">{roomData.university}</h2>
+            <p className="department-name">{roomData.department}</p>
           </div>
-          <div className="divider"></div>
-          <ProfileSection user={auth.currentUser} />
-          <div className="divider"></div>
-          {isCreator && (
-            <>
-              <BackgroundSettings roomKey={roomKey} isCreator={isCreator} />
-              <div className="divider"></div>
-            </>
-          )}
-          <div className="room-key-section">
-            <h3 className="section-title">Room Access</h3>
-            <div className="key-display">
-              <span className="key-label">Invitation Code:</span>
-              <span className="key-value">{roomData.roomKey}</span>
-            </div>
-            {isCreator && (
-              <p className="key-instruction">
-                Share this code with classmates to join this collaborative space
-              </p>
-            )}
-          </div>
-          <div className="divider"></div>
+
           <nav className="sidebar-navigation">
-            <h3 className="section-title">Navigation</h3>
             <button
               className={`nav-item ${activeTab === "magazine" ? "active" : ""}`}
               onClick={() => {
@@ -126,7 +122,7 @@ function RoomPage() {
                 setSidebarOpen(false);
               }}
             >
-              <span className="nav-icon">📰</span>
+              <span className="nav-icon">✨</span>
               <span className="nav-text">Magazine</span>
             </button>
             <button
@@ -136,70 +132,112 @@ function RoomPage() {
                 setSidebarOpen(false);
               }}
             >
-              <span className="nav-icon">👥</span>
-              <span className="nav-text">Members</span>
+              <span className="nav-icon">👤</span>
+              <span className="nav-text">Classmates</span>
             </button>
+            {/* Memories Tab Removed as per request */}
             <button
-              className={`nav-item ${activeTab === "gallery" ? "active" : ""}`}
+              className={`nav-item ${activeTab === "awards" ? "active" : ""}`}
               onClick={() => {
-                setActiveTab("gallery");
+                setActiveTab("awards");
                 setSidebarOpen(false);
               }}
             >
-              <span className="nav-icon">🖼️</span>
-              <span className="nav-text">Gallery</span>
+              <span className="nav-icon">🏆</span>
+              <span className="nav-text">Superlatives</span>
+            </button>
+            <button
+              className={`nav-item ${activeTab === "rollcall" ? "active" : ""}`}
+              onClick={() => {
+                setActiveTab("rollcall");
+                setSidebarOpen(false);
+              }}
+            >
+              <span className="nav-icon">📜</span>
+              <span className="nav-text">Roll Call</span>
             </button>
           </nav>
+
+          <div className="sidebar-divider"></div>
+
+          <div className="room-key-section">
+            <h3 className="section-title">Invite Link</h3>
+            <div className="key-display" title="Click to copy">
+              <span className="key-value">{roomData.roomKey}</span>
+            </div>
+          </div>
+
+          {/* Feature 1: Commencement Countdown */}
+          <div className="countdown-widget animate-fade-in">
+            <h3 className="section-title">Time Until Graduation</h3>
+            <div className="countdown-display">
+              <div className="time-unit">
+                <span className="unit-value">142</span>
+                <span className="unit-label">Days</span>
+              </div>
+              <div className="time-unit">
+                <span className="unit-value">08</span>
+                <span className="unit-label">Hrs</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Feature 2: Wisdom Widget */}
+          <div className="wisdom-widget animate-fade-in">
+            <h3 className="section-title">Daily Wisdom</h3>
+            <p className="wisdom-text">"Your time is limited, so don't waste it living someone else's life."</p>
+            <small className="wisdom-author">– Steve Jobs</small>
+          </div>
+
+          {isCreator && (
+            <div className="creator-controls">
+              <h3 className="section-title">Atmosphere</h3>
+              <BackgroundSettings roomKey={roomKey} isCreator={isCreator} />
+            </div>
+          )}
         </div>
 
         <div className="sidebar-footer">
-          <div className="theme-toggle">
-            <label className="toggle-label">
-              <input
-                type="checkbox"
-                checked={darkMode}
-                onChange={() => setDarkMode(!darkMode)}
-                className="toggle-input"
-              />
-              <span className="toggle-slider"></span>
-              <span className="toggle-text">
-                {darkMode ? "Dark Mode" : "Light Mode"}
-              </span>
-            </label>
+          {/* Feature 1: Profile Detail (Next Chapter) */}
+          <div className="alumni-tag">
+            <span className="tag-label">Next Chapter</span>
+            <span className="tag-value">Pursuing Excellence</span>
           </div>
-
+          <button onClick={() => navigate('/dashboard')} className="nav-item back-btn" style={{ marginBottom: '8px', width: '100%', justifyContent: 'center' }}>
+            <span className="nav-icon">⬅️</span>
+            <span className="nav-text">Back to Hall</span>
+          </button>
           <button onClick={handleLogout} className="logout-btn">
-            <span className="logout-icon">↩️</span>
             Sign Out
           </button>
         </div>
       </aside>
 
       <main className="room-content">
-        <div className="room-header">
+        <header className="room-header animate-fade-in">
+          {/* Feature 3: Year Watermark */}
+          <div className="year-watermark">Class of '24</div>
           {roomData.logo && (
             <div className="university-logo">
-              <img src={roomData.logo} alt={`${roomData.university} logo`} />
+              <img src={roomData.logo} alt="Logo" />
             </div>
           )}
           <h1 className="room-title">{roomData.university}</h1>
           <h2 className="room-subtitle">{roomData.department}</h2>
-        </div>
+        </header>
 
-        {activeTab === "magazine" && (
-          <Magazine
-            roomId={roomData.roomKey}
-            background={roomData.background}
-            isCreator={isCreator}
-          />
-        )}
-        {activeTab === "gallery" && (
-          <div>
-            <ExportButton roomId={roomData.roomKey} />
-            <GalleryView roomId={roomData.roomKey} />
-          </div>
-        )}
-        {activeTab === "members" && <Members roomId={roomData.roomKey} />}
+        <div className="room-tab-content animate-fade-in" style={{ padding: '40px' }}>
+          {activeTab === "magazine" && (
+            <Magazine
+              roomId={roomData.roomKey}
+              background={roomData.background}
+              isCreator={isCreator}
+            />
+          )}
+          {activeTab === "members" && <Members roomId={roomData.roomKey} />}
+          {activeTab === "awards" && <Awards roomId={roomData.roomKey} />}
+          {activeTab === "rollcall" && <RollCall roomId={roomData.roomKey} />}
+        </div>
       </main>
     </div>
   );

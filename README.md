@@ -1,58 +1,38 @@
-# 🎓 GradGram
+# GradGram 🎓
 
-**GradGram** is a full-stack university photo and memory sharing app for graduates. It enables students to create private department-based rooms, share graduation photos, post heartfelt messages, and engage in memory-filled chats — all in one place.
+A cinematic, digital yearbook platform for preserving graduation memories.
 
-Built with **React + Firebase**, GradGram provides an intuitive interface and secure room-based interactions, helping graduates capture and preserve the most memorable moments of their university life.
+## Features
 
----
+-   **Cinematic "Midnight" Aesthetic**: Premium dark mode with gold accents and glassmorphism.
+-   **Room-Based Memories**: Create private rooms for your university department or friend group.
+-   **Graduation Themed UI**:
+    -   🎓 Cap-shaped buttons
+    -   📜 Diploma-style room cards
+    -   🎭 Curtain entrance animations
+-   **Interactive Widgets**:
+    -   Countdown to Commencement
+    -   Daily Wisdom Quotes
+    -   Rolling Credits ("Roll Call")
+    -   Senior Superlatives ("Awards")
+-   **PostCard**: Instagram-style posting with reactions, comments, and "First Post" badges.
 
-## 🖼️ Screenshots
+## Tech Stack
 
-| Home Page                                                                                                       | Post List                                                                                                           | Room Chat                                                                                                       |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| ![Home](https://raw.githubusercontent.com/TAEMZ/grad_gram/main/src/assets/Screenshot%202025-06-25%20232943.png) | ![PostList](https://raw.githubusercontent.com/TAEMZ/grad_gram/main/src/assets/Screenshot%202025-06-25%20233040.png) | ![Room](https://raw.githubusercontent.com/TAEMZ/grad_gram/main/src/assets/Screenshot%202025-06-25%20233059.png) |
+-   **Frontend**: React, Vite
+-   **Styling**: Vanilla CSS (extensive use of variables and glassmorphism)
+-   **Backend**: Firebase (Firestore, Auth)
+-   **Media**: Cloudinary (Image upload)
 
----
+## tailored for You
 
-## 🚀 Features
+This project was refined to include:
+-   A responsive masonry grid for posts.
+-   Real-time data integration for class members.
+-   A polished, "sellable" product UI.
 
-### 🔐 Authentication
+## Getting Started
 
-- Google & Email/Password sign in
-- Role-based access with room-specific permissions
-
-### 📷 Grad Photo Sharing
-
-- Upload graduation images with last words
-- See all posts in a clean gallery or list view
-
-### 🧑‍🎓 Room Management
-
-- Create or join rooms using a `room key`
-- Departments and years are handled by secure keys
-- Creator can delete room; users can leave room
-
-### 🗣️ Interaction & Chat
-
-- Post comments under each photo
-- Chat with other members in the room
-- React to posts and comments
-
-### 🎨 UI Features
-
-- Mobile-first responsive layout with Tailwind CSS
-- Custom room background support (image or color)
-- Light and dark modes
-
----
-
-## 🧠 Tech Stack
-
-| Layer         | Tools                     |
-| ------------- | ------------------------- |
-| Frontend      | React, Tailwind CSS       |
-| Backend       | Firebase Auth & Firestore |
-| Image Hosting | Cloudinary                |
-| Deployment    | Vite, Render              |
-
----
+1.  Clone the repository.
+2.  Run `npm install`.
+3.  Run `npm run dev`.
