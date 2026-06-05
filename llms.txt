@@ -1,0 +1,3 @@
+https://grad-gram.vercel.app
+https://grad-gram.vercel.app/dashboard
+https://grad-gram.vercel.app/magazine
