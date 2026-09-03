@@ -1,62 +1,84 @@
-.profile-section {
-  padding: 15px;
-  margin-bottom: 30px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  text-align: center;
-}
+/* ==========================================================================
+   GradGram Profile Settings Modal Styles
+   ========================================================================== */
 
-.avatar-wrapper {
+.profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 12px;
+  padding: 20px;
+  z-index: 100;
 }
 
-.avatar {
-  width: 80px;
-  height: 80px;
+.profile-modal-card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.profile-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.profile-modal-header h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.profile-avatar-preview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.profile-avatar-img-large {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #4caf50;
+  border: 2px solid var(--gold-primary);
+  background: var(--bg-app);
 }
 
-.user-details {
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.user-name {
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.user-email {
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 10px;
-}
-.privacy-toggle {
-  margin-top: 10px;
+.profile-form-grid {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 16px;
 }
 
-.privacy-toggle label {
-  font-size: 0.85rem;
-  color: #555;
-  margin-bottom: 5px;
+.profile-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.privacy-toggle select {
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 0.9rem;
+.profile-form-group label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
 
-
-.toggle-label {
-  font-size: 0.85rem;
-  color: #555;
+.profile-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
 }

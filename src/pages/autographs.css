@@ -1,0 +1,232 @@
+/* ==========================================================================
+   GradGram "Sign My Yearbook" Autographs & Sticky Wall Styles
+   ========================================================================== */
+
+.autographs-container {
+  padding: 10px 0;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.autographs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.autographs-titles h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.autographs-titles p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Peer Wall Selector Carousel */
+.wall-selector-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 28px;
+  scrollbar-width: thin;
+}
+
+.wall-peer-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.wall-peer-chip:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.wall-peer-chip.active {
+  background: rgba(229, 184, 105, 0.12);
+  border-color: rgba(229, 184, 105, 0.4);
+  color: var(--gold-light);
+  font-weight: 600;
+  box-shadow: 0 0 16px rgba(229, 184, 105, 0.12);
+}
+
+.wall-peer-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(229, 184, 105, 0.3);
+}
+
+/* Autograph Board & Polaroid Sticky Notes */
+.autographs-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  padding: 20px 0;
+}
+
+.autograph-polaroid {
+  background: #fdfbf7;
+  color: #1a202c;
+  padding: 24px 20px 18px;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+}
+
+.autograph-polaroid:hover {
+  transform: scale(1.03) rotate(0deg) !important;
+  box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+/* Scotch Tape Effect */
+.autograph-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(2px);
+  border-left: 2px dashed rgba(0, 0, 0, 0.1);
+  border-right: 2px dashed rgba(0, 0, 0, 0.1);
+}
+
+/* Note Theme Color Variations */
+.autograph-polaroid.parchment {
+  background: #fbf7ee;
+}
+
+.autograph-polaroid.rosegold {
+  background: #fdf0ec;
+}
+
+.autograph-polaroid.champagne {
+  background: #fcf6e8;
+}
+
+.autograph-polaroid.slate-paper {
+  background: #18202c;
+  color: #f1f5f9;
+}
+
+.autograph-sticker-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1.3rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.autograph-message-body {
+  font-family: 'Caveat', cursive;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  margin-bottom: 16px;
+  word-break: break-word;
+}
+
+.autograph-author-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+.autograph-polaroid.slate-paper .autograph-author-footer {
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+.autograph-signer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.autograph-signer-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.autograph-signer-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.autograph-date {
+  font-size: 0.6875rem;
+  opacity: 0.7;
+}
+
+/* Autograph Composer Modal */
+.autograph-composer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+
+.autograph-composer-card {
+  width: 100%;
+  max-width: 500px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-lg);
+}
+
+.color-picker-strip {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.color-option-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.color-option-btn.active {
+  border-color: var(--gold-primary);
+  transform: scale(1.15);
+}

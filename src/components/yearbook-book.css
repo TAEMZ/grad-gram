@@ -1,0 +1,257 @@
+/* ==========================================================================
+   GradGram 3D Physical Hardcover Yearbook Styles
+   ========================================================================== */
+
+.yearbook-3d-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 40px;
+  perspective: 2000px;
+  width: 100%;
+  position: relative;
+}
+
+/* Hardcover Book Wrapper */
+.yearbook-hardcover-wrapper {
+  width: 100%;
+  max-width: 1240px;
+  background: #111520;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 
+    0 30px 60px -12px rgba(0, 0, 0, 0.9),
+    0 18px 36px -18px rgba(0, 0, 0, 0.9),
+    0 0 0 2px #222c3f,
+    0 0 40px rgba(229, 184, 105, 0.12);
+  position: relative;
+}
+
+/* Hanging Silk Bookmark Ribbon */
+.silk-bookmark-ribbon {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 90px;
+  background: linear-gradient(180deg, #991b1b, #dc2626);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+/* Double-Page Spread Open Container */
+.yearbook-open-spread {
+  display: flex;
+  background: #fdfbf7;
+  border-radius: 6px;
+  min-height: 640px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 6px 0 #d4af37,
+    0 12px 0 #1e2638,
+    0 24px 48px rgba(0, 0, 0, 0.85);
+}
+
+@media (max-width: 900px) {
+  .yearbook-open-spread {
+    flex-direction: column;
+    min-height: auto;
+  }
+}
+
+/* Center Leather / Paper Spine Gutter */
+.book-spine-gutter {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 48px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg, 
+    rgba(0, 0, 0, 0.22) 0%, 
+    rgba(0, 0, 0, 0.4) 45%, 
+    rgba(255, 255, 255, 0.05) 50%, 
+    rgba(0, 0, 0, 0.4) 55%, 
+    rgba(0, 0, 0, 0.22) 100%
+  );
+  z-index: 30;
+  pointer-events: none;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 900px) {
+  .book-spine-gutter {
+    display: none;
+  }
+}
+
+/* Individual Pages */
+.book-page-half {
+  flex: 1;
+  padding: 44px 40px;
+  color: #1a202c;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fcfaf6;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.book-page-half.left-page {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: inset -20px 0 30px -10px rgba(0, 0, 0, 0.08);
+}
+
+.book-page-half.right-page {
+  box-shadow: inset 20px 0 30px -10px rgba(0, 0, 0, 0.08);
+}
+
+/* Page Header & Roman Folio */
+.page-folio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.chapter-roman-numeral {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #854d0e;
+  text-transform: uppercase;
+}
+
+.chapter-running-head {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #64748b;
+}
+
+.page-folio-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  margin-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-family: 'Cinzel', serif;
+}
+
+/* Page Turn Corner Controls */
+.page-corner-turn-btn {
+  position: absolute;
+  bottom: 0;
+  width: 54px;
+  height: 54px;
+  background: linear-gradient(135deg, transparent 50%, rgba(212, 175, 55, 0.25) 50%);
+  cursor: pointer;
+  z-index: 25;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 6px;
+  color: #854d0e;
+}
+
+.page-corner-turn-btn.left {
+  left: 0;
+  background: linear-gradient(225deg, transparent 50%, rgba(212, 175, 55, 0.25) 50%);
+  justify-content: flex-start;
+}
+
+.page-corner-turn-btn.right {
+  right: 0;
+}
+
+.page-corner-turn-btn:hover {
+  width: 68px;
+  height: 68px;
+  background: linear-gradient(135deg, transparent 50%, rgba(212, 175, 55, 0.45) 50%);
+}
+
+.page-corner-turn-btn.left:hover {
+  background: linear-gradient(225deg, transparent 50%, rgba(212, 175, 55, 0.45) 50%);
+}
+
+/* Navigation Spread Bar */
+.spread-navigation-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1240px;
+  margin-top: 18px;
+}
+
+.spread-chapter-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.spread-chapter-btn {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.spread-chapter-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.spread-chapter-btn.active {
+  background: var(--gold-subtle);
+  border-color: rgba(229, 184, 105, 0.4);
+  color: var(--gold-light);
+  box-shadow: 0 0 16px rgba(229, 184, 105, 0.15);
+}
+
+/* Holographic Foil Reflection */
+.holographic-foil-medal {
+  background: linear-gradient(135deg, #fef08a, #ca8a04, #eab308, #fef9c3);
+  color: #422006;
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(202, 138, 4, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.holographic-foil-medal::after {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.6) 50%, transparent 60%);
+  transform: rotate(25deg);
+  animation: foilShine 4s ease-in-out infinite;
+}
+
+@keyframes foilShine {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  20%, 100% { transform: translateX(100%) rotate(25deg); }
+}

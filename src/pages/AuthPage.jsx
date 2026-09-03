@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import {
   handleEmailAuth,
   handleGoogleSignIn,
 } from "../controllers/authController";
-import { checkUserRoom } from "../models/authModel"; // <-- import created
+import { checkUserRoom } from "../models/authModel";
+import { GraduationCap, Mail, Lock, User, ArrowRight } from "lucide-react";
+import { GradGramMark } from "../components/GradGramLogo";
 
 function AuthPage() {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -21,12 +23,7 @@ function AuthPage() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const proceedAfterLogin = async (user) => {
-    const roomData = await checkUserRoom(user.uid);
-    if (roomData) {
-      navigate("/dashboard"); // Instead of navigating straight to room, land on Dashboard
-    } else {
-      navigate("/dashboard");
-    }
+    navigate("/dashboard");
   };
 
   const handleSubmit = async (e) => {
@@ -34,89 +31,198 @@ function AuthPage() {
     if (!form.email || !form.password) {
       return alert("Email and Password are required");
     }
-    const user = await handleEmailAuth(form, isRegister);
-    if (user) proceedAfterLogin(user);
+    setIsSubmitting(true);
+    try {
+      const user = await handleEmailAuth(form, isRegister);
+      if (user) proceedAfterLogin(user);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleGoogleAuth = async () => {
-    const user = await handleGoogleSignIn();
-    if (user) proceedAfterLogin(user);
+    setIsSubmitting(true);
+    try {
+      const user = await handleGoogleSignIn();
+      if (user) proceedAfterLogin(user);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="page-container">
-      <div className="glass-card animate-fade-in text-center">
-        <h1 className="gradient-text" style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>GradGram</h1>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-          {isRegister ? "Start your collaborative journey" : "Welcome back to your memories"}
-        </p>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "24px",
+        background: "radial-gradient(circle at 50% 10%, rgba(229, 184, 105, 0.08), transparent 60%), #080a0f",
+      }}
+    >
+      <div
+        className="card-glass animate-fade-in"
+        style={{
+          width: "100%",
+          maxWidth: "460px",
+          padding: "40px",
+          borderRadius: "var(--radius-xl)",
+          border: "1px solid var(--border-medium)",
+          background: "rgba(14, 18, 26, 0.85)",
+        }}
+      >
+        {/* Brand Mark */}
+        <div style={{ textAlign: "center", marginBottom: "28px" }}>
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
+            <GradGramMark size={56} />
+          </div>
+          <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: "1.875rem", color: "#ffffff", marginBottom: "6px" }}>
+            GradGram
+          </h1>
+          <p style={{ color: "var(--text-secondary)", fontSize: "0.875rem" }}>
+            {isRegister
+              ? "Create your digital yearbook profile"
+              : "Sign in to access your graduating cohorts"}
+          </p>
+        </div>
 
-        <form onSubmit={handleSubmit} style={{ background: 'transparent', boxShadow: 'none', padding: 0, color: 'inherit' }}>
-          <h2 style={{ marginBottom: '1.5rem', fontSize: '1.5rem' }}>
-            {isRegister ? "Create Account" : "Sign In"}
-          </h2>
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
-
+        {/* Auth Form */}
+        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           {isRegister && (
-            <input
-              type="text"
-              name="displayName"
-              placeholder="Your Full Name"
-              value={form.displayName}
-              onChange={handleChange}
-              required
-            />
+            <div>
+              <label style={{ display: "block", fontSize: "0.8125rem", color: "var(--text-secondary)", marginBottom: "6px" }}>
+                Full Name
+              </label>
+              <div style={{ position: "relative" }}>
+                <User size={16} color="var(--slate-400)" style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)" }} />
+                <input
+                  type="text"
+                  name="displayName"
+                  className="input-base"
+                  style={{ paddingLeft: "38px" }}
+                  placeholder="e.g. Alex Johnson"
+                  value={form.displayName}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
           )}
 
-          <button type="submit">
-            {isRegister ? "Register Now" : "Sign In"}
-          </button>
+          <div>
+            <label style={{ display: "block", fontSize: "0.8125rem", color: "var(--text-secondary)", marginBottom: "6px" }}>
+              Email Address
+            </label>
+            <div style={{ position: "relative" }}>
+              <Mail size={16} color="var(--slate-400)" style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)" }} />
+              <input
+                type="email"
+                name="email"
+                className="input-base"
+                style={{ paddingLeft: "38px" }}
+                placeholder="name@university.edu"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
 
-          <div style={{ margin: '1.5rem 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ flex: 1, height: '1px', background: 'var(--glass-border)' }}></div>
-            <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>OR</span>
-            <div style={{ flex: 1, height: '1px', background: 'var(--glass-border)' }}></div>
+          <div>
+            <label style={{ display: "block", fontSize: "0.8125rem", color: "var(--text-secondary)", marginBottom: "6px" }}>
+              Password
+            </label>
+            <div style={{ position: "relative" }}>
+              <Lock size={16} color="var(--slate-400)" style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)" }} />
+              <input
+                type="password"
+                name="password"
+                className="input-base"
+                style={{ paddingLeft: "38px" }}
+                placeholder="••••••••"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
 
           <button
-            type="button"
-            onClick={handleGoogleAuth}
-            className="secondary-btn"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
+            type="submit"
+            className="btn btn-primary"
+            style={{ width: "100%", marginTop: "8px", padding: "12px" }}
+            disabled={isSubmitting}
           >
-            <svg width="18" height="18" viewBox="0 0 18 18">
-              <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.127-.843 2.083-1.797 2.715v2.257h2.91c1.703-1.567 2.683-3.874 2.683-6.613z" fill="#4285F4"/>
-              <path d="M9 18c2.43 0 4.467-.806 5.956-2.187l-2.91-2.257c-.806.54-1.837.86-3.046.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
-              <path d="M3.964 10.712c-.18-.54-.282-1.117-.282-1.712s.102-1.173.282-1.712V4.956H.957a8.991 8.991 0 000 8.088l3.007-2.332z" fill="#FBBC05"/>
-              <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.443 2.049.957 4.956L3.964 7.29c.708-2.127 2.692-3.71 5.036-3.71z" fill="#EA4335"/>
-            </svg>
-            Continue with Google
+            <span>{isSubmitting ? "Processing..." : isRegister ? "Create Account" : "Sign In to Account"}</span>
+            <ArrowRight size={16} />
           </button>
-
-          <p style={{ marginTop: '2rem', fontSize: '14px', color: 'var(--text-secondary)' }}>
-            {isRegister ? "Already have an account?" : "Don't have an account?"}
-            <button type="button" onClick={toggleMode} className="toggle-link">
-              {isRegister ? "Login" : "Register"}
-            </button>
-          </p>
         </form>
+
+        {/* Divider */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", margin: "20px 0" }}>
+          <div style={{ flex: 1, height: "1px", background: "var(--border-subtle)" }} />
+          <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+            OR
+          </span>
+          <div style={{ flex: 1, height: "1px", background: "var(--border-subtle)" }} />
+        </div>
+
+        {/* Google SSO */}
+        <button
+          type="button"
+          onClick={handleGoogleAuth}
+          className="btn btn-secondary"
+          style={{ width: "100%", padding: "12px", gap: "10px" }}
+          disabled={isSubmitting}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path
+              fill="#4285F4"
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+            />
+            <path
+              fill="#34A853"
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+            />
+            <path
+              fill="#EA4335"
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+            />
+          </svg>
+          <span>Continue with Google</span>
+        </button>
+
+        {/* Footer switch */}
+        <div style={{ textAlign: "center", marginTop: "24px", fontSize: "0.875rem", color: "var(--text-secondary)" }}>
+          {isRegister ? (
+            <>
+              Already have an account?{" "}
+              <button
+                type="button"
+                onClick={toggleMode}
+                style={{ background: "none", border: "none", color: "var(--gold-primary)", cursor: "pointer", fontWeight: 600 }}
+              >
+                Sign In
+              </button>
+            </>
+          ) : (
+            <>
+              New to GradGram?{" "}
+              <button
+                type="button"
+                onClick={toggleMode}
+                style={{ background: "none", border: "none", color: "var(--gold-primary)", cursor: "pointer", fontWeight: 600 }}
+              >
+                Create Account
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

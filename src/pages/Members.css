@@ -1,76 +1,92 @@
+/* ==========================================================================
+   GradGram Classmate Directory (Members) Styles
+   ========================================================================== */
+
 .members-container {
-  padding: 20px;
+  padding: 10px 0;
 }
 
-.members-container h2 {
-  margin-bottom: 15px;
+.members-header {
+  margin-bottom: 24px;
+}
+
+.members-header h2 {
   font-size: 1.5rem;
-  color: #333;
-  text-align: center;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.members-header p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
 }
 
 .members-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 15px;
-}
-
-.member-email {
-  display: block;
-  font-size: 0.8rem;
-  color: #666;
-  margin-top: 4px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
 }
 
 .member-card {
-  background: #ffffff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  gap: 10px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 
-.member-name {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 8px;
-  font-size: 1.1rem;
-  color: #222;
+.member-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-medium);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.member-label {
-  font-size: 0.9rem;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: #eee;
-  color: #555;
+.member-avatar-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(229, 184, 105, 0.35);
+  background: var(--bg-surface-elevated);
+}
+
+.member-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.member-email {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  word-break: break-all;
 }
 
 .member-next-chapter {
-  display: block;
-  font-size: 0.85rem;
-  color: hsl(var(--accent-primary));
-  font-weight: 600;
-  margin: 6px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--gold-light);
+  background: var(--gold-subtle);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(229, 184, 105, 0.2);
 }
 
 .member-card.creator {
-  background: #e3f2fd;
-  border: 2px solid #90caf9;
-}
-
-.member-card.creator .member-label {
-  background: #90caf9;
-  color: white;
+  border-color: rgba(229, 184, 105, 0.4);
 }
 
 .member-card.self {
-  background: #f1f8e9;
-  border: 2px solid #aed581;
-}
-
-.member-card.self .member-label {
-  background: #aed581;
-  color: white;
+  border-color: rgba(148, 163, 184, 0.4);
 }

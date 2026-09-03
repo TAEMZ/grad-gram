@@ -1,478 +1,383 @@
-/* === Base Styles & Variables === */
-:root {
-  --sidebar-w: 320px;
-  --header-h: 400px;
-  --glass-high: hsla(222, 47%, 4%, 0.8);
-  --glass-low: hsla(222, 47%, 8%, 0.4);
-}
+/* ==========================================================================
+   GradGram Cohort Room Layout & Refined Sidebar
+   ========================================================================== */
 
-/* === Room Container === */
-.room-container {
+.room-layout {
   display: flex;
   min-height: 100vh;
-  background: radial-gradient(circle at top right, hsl(var(--bg-secondary)), hsl(var(--bg-primary)));
-  color: white;
+  background-color: var(--bg-app);
 }
 
-/* === Sidebar Navigation === */
-.rooms-sidebar {
-  width: var(--sidebar-w);
-  background: var(--glass-high);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  height: 100vh;
-  border-right: 1px solid var(--glass-border);
+/* Mobile Topbar */
+.room-topbar {
+  display: none;
   position: fixed;
-  z-index: 1000;
-  transform: translateX(-100%);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  flex-direction: column;
-}
-
-.rooms-sidebar.open {
-  transform: translateX(0);
-}
-
-.sidebar-content {
-  padding: 48px 32px;
-  flex: 1;
-  overflow-y: auto;
-}
-
-.academic-badge {
-  padding-bottom: 32px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.university-name {
-  font-size: 1.4rem;
-  margin-bottom: 4px;
-  background: linear-gradient(to right, #fff, #94a3b8);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.department-name {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.sidebar-navigation {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 20px;
-  border: 1px solid transparent;
-  border-radius: 16px;
-  background: transparent;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-
-.nav-item:hover {
-  background: hsla(0, 0%, 100%, 0.03);
-  color: white;
-  transform: translateX(4px);
-}
-
-.nav-item.active {
-  background: hsla(var(--accent-primary) / 0.1);
-  border-color: hsla(var(--accent-primary) / 0.2);
-  color: hsl(var(--accent-primary));
-  box-shadow: 0 0 20px hsla(var(--accent-primary) / 0.05);
-}
-
-.nav-icon {
-  font-size: 1.2rem;
-  filter: grayscale(1);
-  transition: filter 0.3s ease;
-}
-
-.nav-item.active .nav-icon {
-  filter: grayscale(0);
-}
-
-/* === Room Main Content === */
-.room-content {
-  flex: 1;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Room Hero Header */
-.room-header {
-  height: var(--header-h);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 40px;
-  background:
-    radial-gradient(circle at 50% 50%, hsla(var(--room-accent, 217 91% 60%) / 0.1), transparent 70%),
-    linear-gradient(to bottom, transparent, hsl(var(--bg-primary)));
-  overflow: hidden;
-}
-
-.room-header::before {
-  content: "";
-  position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
-  opacity: 0.03;
-  pointer-events: none;
-}
-
-.university-logo {
-  width: 120px;
-  height: 120px;
-  margin-bottom: 32px;
-  border-radius: 50%;
-  padding: 8px;
-  background: hsla(0, 0%, 100%, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  position: relative;
-  z-index: 2;
-}
-
-.university-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 50%;
-}
-
-.room-title {
-  font-size: 5rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: white;
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  position: relative;
-  z-index: 2;
-}
-
-.room-subtitle {
-  font-size: 1.4rem;
-  color: var(--text-secondary);
-  font-weight: 300;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  position: relative;
-  z-index: 2;
-}
-
-/* Room Tab Content Container */
-.room-tab-content {
-  flex: 1;
-  padding: 80px 40px;
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-/* Sidebar Navigation Refinements */
-.sidebar-navigation {
-  margin-top: 24px;
-}
-
-.nav-item {
-  margin-bottom: 8px;
-  letter-spacing: 0.02em;
-}
-
-.sidebar-divider {
-  height: 1px;
-  background: var(--glass-border);
-  margin: 32px 0;
-}
-
-/* === Background Settings UI - Pro Pass === */
-.background-settings-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 8px 0;
-}
-
-.settings-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.settings-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-secondary);
-  font-weight: 700;
-  opacity: 0.8;
-}
-
-.color-presets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  height: 56px;
+  background: var(--bg-surface-elevated);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 16px;
   align-items: center;
+  justify-content: space-between;
+  z-index: 50;
 }
 
-.color-dot {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  padding: 0;
-}
-
-.color-dot.active {
-  border-color: white;
-  transform: scale(1.25);
-  box-shadow: 0 0 15px hsla(0, 0%, 100%, 0.4);
-}
-
-.custom-color-wrapper {
-  position: relative;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
-  overflow: hidden;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.color-input {
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  width: 40px;
-  height: 40px;
+.topbar-toggle {
+  background: transparent;
   border: none;
-  background: none;
+  color: var(--text-primary);
   cursor: pointer;
-  opacity: 0;
-}
-
-.image-upload-trigger {
-  display: inline-block;
-  cursor: pointer;
-}
-
-.upload-text {
-  font-size: 0.85rem;
-  color: hsl(var(--accent-primary));
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid hsla(var(--accent-primary) / 0.2);
-  padding-bottom: 2px;
-}
-
-.image-upload-trigger:hover .upload-text {
-  color: white;
-  border-bottom-color: white;
-}
-
-/* Sidebar Branding */
-.academic-badge {
-  text-align: center;
-}
-
-.university-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-}
-
-/* Burger Button Pro */
-.room-container .burger-btn {
-  background: hsla(225, 45%, 6%, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  top: 32px;
-  left: 32px;
-}
-
-/* === Sidebar Widgets === */
-.countdown-widget {
-  background: hsla(0, 0%, 0%, 0.3);
-  border: 1px solid var(--accent-gold);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 24px;
-}
-
-.countdown-display {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 16px;
+  padding: 6px;
 }
 
-.time-unit {
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 45;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* Refined Cohort Navigation Sidebar */
+.room-sidebar {
+  width: 290px;
+  background: rgba(10, 14, 22, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  overflow-y: auto;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 1024px) {
+  .room-topbar {
+    display: flex;
+  }
+  .room-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+  }
+  .room-sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+.room-sidebar-header {
+  padding: 22px 18px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.back-link-btn {
+  display: inline-flex;
   align-items: center;
-}
-
-.unit-value {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  color: white;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.unit-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: hsl(var(--accent-gold));
-  margin-top: 4px;
-}
-
-.wisdom-widget {
-  background: hsla(0, 0%, 100%, 0.03);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 24px;
-  border-left: 3px solid hsl(var(--accent-primary));
-}
-
-.wisdom-text {
-  font-style: italic;
-  font-family: 'Playfair Display', serif;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 500;
   color: var(--text-secondary);
-  opacity: 0.8;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 14px;
+  padding: 0;
+  transition: color 0.15s ease;
 }
 
-/* Feature 1: Alumni Tag */
-.alumni-tag {
+.back-link-btn:hover {
+  color: var(--gold-light);
+}
+
+.cohort-identity {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-bottom: 24px;
-  padding: 0 4px;
 }
 
-.tag-label {
-  font-size: 0.7rem;
+.cohort-uni-title {
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
+.cohort-dept-subtitle {
+  font-size: 0.75rem;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.room-nav-section {
+  flex: 1;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-section-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-secondary);
-  opacity: 0.6;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  padding: 0 8px;
 }
 
-.tag-value {
-  font-size: 0.9rem;
-  color: hsl(var(--accent-primary));
+.room-nav-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* Nav Item with active gold indicator rail */
+.room-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.room-nav-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+.room-nav-item.active {
+  background: rgba(229, 184, 105, 0.08);
+  border-color: rgba(229, 184, 105, 0.25);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.room-nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--gold-primary);
+  box-shadow: 0 0 8px var(--gold-primary);
+}
+
+.room-nav-item svg {
+  color: var(--text-muted);
+  transition: color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.room-nav-item:hover svg,
+.room-nav-item.active svg {
+  color: var(--gold-primary);
+}
+
+/* Sidebar Widgets */
+.sidebar-widget-box {
+  background: rgba(16, 21, 33, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+
+.widget-title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.invite-key-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-family: monospace;
+  color: var(--slate-300);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.invite-key-pill:hover {
+  border-color: var(--border-medium);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.countdown-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 0 4px;
+}
+
+.countdown-digit {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.countdown-unit {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.quote-widget-text {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--slate-300);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.quote-widget-author {
+  font-size: 0.6875rem;
+  color: var(--gold-light);
+  text-align: right;
   font-weight: 500;
 }
 
-/* Feature 3: Year Watermark */
-.year-watermark {
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: white;
-  opacity: 0.15;
-  letter-spacing: 0.05em;
-  z-index: 5;
-  pointer-events: none;
-}
-
-/* Sidebar Footer Adjustments */
 .sidebar-footer {
-  padding: 32px;
-  border-top: 1px solid var(--glass-border);
-  background: linear-gradient(135deg, hsl(var(--accent-primary)), hsl(var(--accent-secondary)));
-  color: white;
+  padding: 14px 16px;
+  border-top: 1px solid var(--border-subtle);
 }
 
-.back-btn {
-  background: hsla(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
+/* Main Content Area */
+.room-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-x: hidden;
+  padding-top: 0;
 }
 
-.back-btn:hover {
-  background: hsla(255, 255, 255, 0.1);
-}
-
-.logout-btn {
-  margin-top: 12px;
-  background: hsla(0, 100%, 60%, 0.1);
-  border-color: hsla(0, 100%, 50%, 0.3);
-  transform: translateY(-2px);
-}
-
-/* Burger Button Override for Room */
-.room-container .burger-btn {
-  background: var(--glass-high);
-  border: 1px solid var(--glass-border);
-}
-
-/* Responsive */
-@media (min-width: 1024px) {
-  .room-content {
-    margin-left: var(--sidebar-w);
-  }
-
-  .rooms-sidebar {
-    transform: translateX(0);
-  }
-
-  .room-container .burger-btn {
-    display: none;
+@media (max-width: 1024px) {
+  .room-main {
+    padding-top: 56px;
   }
 }
 
-@media (max-width: 640px) {
-  .room-title {
-    font-size: 2.5rem;
-  }
+.room-hero-banner {
+  padding: 24px 36px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: linear-gradient(180deg, rgba(19, 24, 36, 0.6) 0%, transparent 100%);
+  flex-wrap: wrap;
+}
 
-  .room-subtitle {
-    font-size: 1rem;
-    letter-spacing: 0.1em;
-  }
+.room-hero-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 
-  .room-header {
-    height: 300px;
-    padding: 24px;
-  }
+.room-hero-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid rgba(229, 184, 105, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-surface-elevated);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.6);
+  flex-shrink: 0;
+}
 
-  .university-logo {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
+.room-hero-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+}
+
+.room-hero-crest {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--gold-primary);
+}
+
+.room-hero-titles h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.room-hero-titles h2 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.room-viewport-content {
+  flex: 1;
+  padding: 28px 36px;
+}
+
+@media (max-width: 768px) {
+  .room-hero-banner {
+    padding: 16px 20px;
+  }
+  .room-viewport-content {
+    padding: 20px 16px;
   }
 }

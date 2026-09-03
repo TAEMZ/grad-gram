@@ -1,0 +1,124 @@
+/* ==========================================================================
+   GradGram Darkroom Photo Lab & Emulsion Developer Styles
+   ========================================================================== */
+
+.darkroom-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 12, 0.88);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 120;
+}
+
+.darkroom-chamber-card {
+  width: 100%;
+  max-width: 520px;
+  background: radial-gradient(circle at 50% 10%, rgba(229, 184, 105, 0.12), transparent 70%),
+              #0c101a;
+  border: 1px solid rgba(229, 184, 105, 0.35);
+  border-radius: var(--radius-2xl);
+  padding: 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(229, 184, 105, 0.15);
+  position: relative;
+}
+
+/* Developing Polaroid Live Canvas */
+.darkroom-polaroid-preview {
+  background: #fdfbf7;
+  border-radius: 4px;
+  padding: 14px 14px 18px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
+  margin: 16px auto 22px;
+  max-width: 320px;
+  position: relative;
+}
+
+.darkroom-photo-screen {
+  width: 100%;
+  height: 240px;
+  background: #080a0f;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.darkroom-photo-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Chemical Emulsion Developing Shader */
+.darkroom-photo-screen img.developing {
+  filter: sepia(90%) brightness(35%) contrast(140%) blur(1.5px);
+  animation: emulsionDevelop 2.2s forwards;
+}
+
+@keyframes emulsionDevelop {
+  0% {
+    filter: sepia(90%) brightness(30%) contrast(150%) blur(2px);
+  }
+  50% {
+    filter: sepia(50%) brightness(60%) contrast(120%) blur(0.8px);
+  }
+  100% {
+    filter: sepia(0%) brightness(100%) contrast(100%) blur(0px);
+  }
+}
+
+/* Live Handwritten Chin Input */
+.darkroom-chin-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: 'Caveat', cursive;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  color: #1a202c;
+  outline: none;
+  margin-top: 10px;
+  padding: 4px 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+  resize: none;
+}
+
+.darkroom-chin-input::placeholder {
+  color: #94a3b8;
+  font-family: 'Caveat', cursive;
+}
+
+/* Washi Tape and Badge Selectors */
+.darkroom-tools-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.washi-choice-chip {
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.washi-choice-chip.active {
+  background: var(--gold-subtle);
+  border-color: rgba(229, 184, 105, 0.4);
+  color: var(--gold-light);
+  font-weight: 600;
+}

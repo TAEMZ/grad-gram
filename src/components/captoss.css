@@ -1,0 +1,86 @@
+/* ==========================================================================
+   GradGram Cap Toss Ceremony Styles
+   ========================================================================== */
+
+.captoss-stage-card {
+  background: radial-gradient(circle at 50% 30%, rgba(229, 184, 105, 0.12), transparent 70%),
+              var(--bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-2xl);
+  padding: 48px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.captoss-titles h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.captoss-titles p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto 28px;
+}
+
+.communal-counter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background: var(--gold-subtle);
+  border: 1px solid rgba(229, 184, 105, 0.35);
+  color: var(--gold-light);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 36px;
+  box-shadow: 0 0 24px rgba(229, 184, 105, 0.18);
+}
+
+.toss-launch-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 40px;
+  border-radius: 9999px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+  color: #080a0f;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.45);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toss-launch-button:hover {
+  transform: scale(1.06) translateY(-2px);
+  box-shadow: 0 12px 40px rgba(245, 158, 11, 0.6);
+  filter: brightness(1.1);
+}
+
+.toss-launch-button:active {
+  transform: scale(0.96);
+}
+
+/* Floating Mortarboard Cap Animation */
+.flying-cap-entity {
+  position: absolute;
+  pointer-events: none;
+  z-index: 50;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6));
+}

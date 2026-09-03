@@ -79,7 +79,7 @@ export const signInWithGoogle = async () => {
 // ✅ Create a Room
 export async function createRoomInDatabase(
   uid,
-  { university, department, logo }
+  { university, department, logo, commencementDate, gradYear, shelfStyle }
 ) {
   const roomKey = generateRandomId();
   const roomRef = doc(db, "rooms", roomKey);
@@ -90,7 +90,10 @@ export async function createRoomInDatabase(
   await setDoc(roomRef, {
     university,
     department,
-    logo,
+    logo: logo || "",
+    commencementDate: commencementDate || "2026-05-30",
+    gradYear: gradYear || "2026",
+    shelfStyle: shelfStyle || "leaning-right",
     createdBy: uid,
     createdAt: Date.now(),
     roomKey,

@@ -1,0 +1,142 @@
+/* ==========================================================================
+   GradGram Alumni Relocation & Career Directory Styles
+   ========================================================================== */
+
+.alumni-map-container {
+  padding: 10px 0;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.alumni-header {
+  margin-bottom: 28px;
+}
+
+.alumni-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.alumni-header p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* City Hub Grid */
+.city-hubs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.city-hub-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.city-hub-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-medium);
+  transform: translateY(-2px);
+}
+
+.city-hub-card.active {
+  background: rgba(229, 184, 105, 0.12);
+  border-color: rgba(229, 184, 105, 0.4);
+  box-shadow: 0 0 20px rgba(229, 184, 105, 0.15);
+}
+
+.city-hub-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.city-hub-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--gold-light);
+}
+
+/* Alumni Peer Bento Cards */
+.alumni-peers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.alumni-peer-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.alumni-peer-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(229, 184, 105, 0.3);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.alumni-peer-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.alumni-peer-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(229, 184, 105, 0.35);
+  background: var(--bg-surface-elevated);
+  flex-shrink: 0;
+}
+
+.alumni-peer-info h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.alumni-destination-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--gold-light);
+  background: var(--gold-subtle);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(229, 184, 105, 0.2);
+  margin-top: 6px;
+}
+
+.alumni-location-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--slate-300);
+}

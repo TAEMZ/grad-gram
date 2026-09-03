@@ -1,7 +1,13 @@
 import React, { useState, useRef } from "react";
+import { Pencil, Trash2, Heart, ThumbsUp, Laugh, Sparkles, MessageCircle } from "lucide-react";
 import "./postcard.css";
 
-const EMOJIS = ["👍", "❤️", "😂", "😢"];
+const REACTIONS = [
+  { label: "❤️", icon: Heart, name: "love" },
+  { label: "👍", icon: ThumbsUp, name: "like" },
+  { label: "😂", icon: Laugh, name: "laugh" },
+  { label: "✨", icon: Sparkles, name: "sparkle" },
+];
 
 function PostCard({
   post,
@@ -14,33 +20,21 @@ function PostCard({
 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const galleryRef = useRef(null);
-  const counts = EMOJIS.reduce((acc, emoji) => {
-    acc[emoji] = emojiCounts[emoji] || 0;
+
+  const counts = REACTIONS.reduce((acc, r) => {
+    acc[r.label] = emojiCounts[r.label] || 0;
     return acc;
   }, {});
-
-  // Temporal Aging Logic
-  const isOld = post.createdAt && (Date.now() - post.createdAt.toMillis() > 1000 * 60 * 60 * 48); // Older than 48 hours
-
-  // Determine sentiment class based on current reactions
-  const getSentimentClass = () => {
-    const total = Object.values(counts).reduce((a, b) => a + b, 0);
-    if (total === 0) return "";
-
-    const maxEmoji = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-    if (maxEmoji === "❤️" && counts["❤️"] > 0) return "sentiment-love";
-    if (maxEmoji === "👍" && counts["👍"] > 0) return "sentiment-joy";
-    if (maxEmoji === "😢" && counts["😢"] > 0) return "sentiment-sad";
-    return "";
-  };
 
   const handleScroll = () => {
     if (galleryRef.current) {
       const container = galleryRef.current;
       const scrollPosition = container.scrollLeft;
       const imageWidth = container.offsetWidth;
-      const newIndex = Math.round(scrollPosition / imageWidth);
-      setCurrentImageIndex(newIndex);
+      if (imageWidth > 0) {
+        const newIndex = Math.round(scrollPosition / imageWidth);
+        setCurrentImageIndex(newIndex);
+      }
     }
   };
 
@@ -56,38 +50,43 @@ function PostCard({
     }
   };
 
-  const [animatingEmoji, setAnimatingEmoji] = useState(null);
+  const authorSeed = post.authorName || post.authorId || "Graduate";
+  const avatarUrl = `https://api.dicebear.com/7.x/lorelei/svg?seed=${encodeURIComponent(authorSeed)}&backgroundColor=141924`;
 
-  const handleReactClick = (emoji) => {
-    setAnimatingEmoji(emoji);
-    onReact(emoji);
-    setTimeout(() => setAnimatingEmoji(null), 400); // Reset animation state
-  };
+  // Formatted date if available
+  const dateFormatted = post.createdAt?.toDate
+    ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(post.createdAt.toDate())
+    : "Memory";
 
   return (
-    <div className={`post-card ${getSentimentClass()} ${isOld ? "temporal-old" : ""}`}>
-      {/* Header: Author & Actions */}
-      <div className="post-header">
+    <article className="post-card">
+      {/* Header */}
+      <header className="post-header">
         <div className="author-info">
-          <div className="author-avatar">{post.authorName ? post.authorName[0].toUpperCase() : "?"}</div>
+          <img src={avatarUrl} alt={post.authorName || "Author"} className="author-avatar-img" />
           <div className="author-details">
-            <span className="post-author">{post.authorName}</span>
-            {post.isFirstPost && (
-              <span className="tassel-badge" title="First Contribution Milestone">
-                ✨ First Post
-              </span>
-            )}
+            <span className="post-author">{post.authorName || "Classmate"}</span>
+            <span className="post-date-badge">{dateFormatted}</span>
           </div>
         </div>
 
         {canEdit && (
           <div className="header-actions">
-            <button onClick={() => onEdit(post)} title="Edit Message" className="icon-btn">✏️</button>
-            <button onClick={onDelete} title="Remove Memory" className="icon-btn">🗑️</button>
+            {onEdit && (
+              <button onClick={() => onEdit(post)} title="Edit Message" className="icon-btn-card">
+                <Pencil size={15} />
+              </button>
+            )}
+            {onDelete && (
+              <button onClick={onDelete} title="Remove Memory" className="icon-btn-card danger">
+                <Trash2 size={15} />
+              </button>
+            )}
           </div>
         )}
-      </div>
+      </header>
 
+      {/* Image Gallery */}
       {Array.isArray(post.imageUrls) && post.imageUrls.length > 0 && (
         <div className="post-image-container">
           <div
@@ -96,7 +95,7 @@ function PostCard({
             onScroll={handleScroll}
           >
             {post.imageUrls.map((img, idx) => (
-              <img key={idx} src={img} alt={`Memory ${idx + 1}`} />
+              <img key={idx} src={img} alt={`Memory ${idx + 1}`} loading="lazy" />
             ))}
           </div>
 
@@ -114,32 +113,34 @@ function PostCard({
         </div>
       )}
 
-      {/* Footer Content: Actions Row & Message */}
+      {/* Content & Reactions */}
       <div className="post-content">
         <div className="reactions-row">
-          {EMOJIS.map((emoji) => (
-            <button
-              key={emoji}
-              className={`emoji-btn ${userEmoji === emoji ? "active" : ""} ${animatingEmoji === emoji ? "hyper-reaction" : ""}`}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleReactClick(emoji);
-              }}
-            >
-              <span>{emoji}</span>
-              {counts[emoji] > 0 && (
-                <span className="emoji-count">{counts[emoji]}</span>
-              )}
-            </button>
-          ))}
+          {REACTIONS.map((r) => {
+            const count = counts[r.label] || 0;
+            const isUserSelected = userEmoji === r.label;
+            return (
+              <button
+                key={r.label}
+                className={`reaction-pill ${isUserSelected ? "active" : ""}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onReact && onReact(r.label);
+                }}
+              >
+                <span>{r.label}</span>
+                {count > 0 && <span>{count}</span>}
+              </button>
+            );
+          })}
         </div>
 
         <div className="post-message-area">
           <span className="author-name-inline">{post.authorName}</span>
-          <span className="post-message-text"> {post.message}</span>
+          <span>{post.message}</span>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 

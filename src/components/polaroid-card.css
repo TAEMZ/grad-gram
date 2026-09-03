@@ -1,0 +1,271 @@
+/* ==========================================================================
+   GradGram 3D Double-Sided Polaroid & Rubber Stamp Styles
+   ========================================================================== */
+
+.polaroid-flip-stage {
+  perspective: 1200px;
+  width: 100%;
+  max-width: 330px;
+  margin: 0 auto;
+}
+
+/* The 3D Card Flipper */
+.polaroid-card-3d {
+  width: 100%;
+  min-height: 450px;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease;
+}
+
+/* FRONT FACE */
+.polaroid-face-front {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #fdfbf7;
+  padding: 14px 14px 18px;
+  border-radius: 4px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Washi Tape / Paper Clip Anchors */
+.polaroid-anchor-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 22px;
+  background: rgba(229, 184, 105, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+  border-left: 2px dashed rgba(0, 0, 0, 0.15);
+  border-right: 2px dashed rgba(0, 0, 0, 0.15);
+  z-index: 20;
+}
+
+.polaroid-anchor-tape.scotch {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.polaroid-anchor-tape.clip {
+  width: 16px;
+  height: 34px;
+  background: transparent;
+  border: 3px solid #d4af37;
+  border-radius: 12px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Glossy Photographic Frame */
+.polaroid-photo-frame {
+  position: relative;
+  width: 100%;
+  height: 270px;
+  background: #080a0f;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.polaroid-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Retro Orange 35mm Date Stamp */
+.retro-35mm-date {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #f97316;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.8), 0 0 2px #ea580c;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+}
+
+/* Handwritten Polaroid Chin */
+.polaroid-chin {
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.polaroid-handwritten-caption {
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  color: #1a202c;
+  word-break: break-word;
+  margin-bottom: 8px;
+}
+
+/* Reaction Pills Row */
+.polaroid-reactions-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0;
+  flex-wrap: wrap;
+}
+
+.polaroid-reaction-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  color: #1e293b;
+}
+
+.polaroid-reaction-pill:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.08);
+  transform: scale(1.08);
+}
+
+.polaroid-reaction-pill.active {
+  background: rgba(229, 184, 105, 0.2);
+  border-color: #d4af37;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.polaroid-reaction-pill:disabled {
+  opacity: 0.85;
+  cursor: default;
+}
+
+.reaction-counter-num {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+/* Author Action Bar */
+.author-actions-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.author-action-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.03);
+  color: #334155;
+  transition: all 0.15s ease;
+}
+
+.author-action-pill:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #0f172a;
+}
+
+.author-action-pill.delete {
+  color: #dc2626;
+  border-color: rgba(220, 38, 38, 0.2);
+}
+
+.author-action-pill.delete:hover {
+  background: rgba(220, 38, 38, 0.08);
+}
+
+.polaroid-flip-hint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.12);
+  font-size: 0.6875rem;
+  color: #64748b;
+}
+
+/* BACK FACE: POSTCARD / DIARY WITH RUBBER STAMPS */
+.polaroid-face-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: rotateY(180deg);
+  background: #fbf7ee;
+  border-radius: 4px;
+  padding: 22px 18px 16px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: 
+    radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.postcard-postage-mark {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.postcard-diary-entry {
+  font-family: 'Caveat', cursive;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  color: #1e293b;
+  margin: 10px 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Rubber Ink Stamp Effect */
+.rubber-ink-stamp {
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 4px 10px;
+  border: 3px solid currentColor;
+  border-radius: 4px;
+  mix-blend-mode: multiply;
+  transform: rotate(-10deg);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.rubber-ink-stamp.crimson {
+  color: #b91c1c;
+}
+
+.rubber-ink-stamp.navy {
+  color: #1d4ed8;
+}
+
+.rubber-ink-stamp.gold {
+  color: #b45309;
+}

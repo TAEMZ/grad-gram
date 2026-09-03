@@ -3,95 +3,125 @@ import {
   collection,
   query,
   onSnapshot,
-  updateDoc,
   deleteDoc,
   doc,
 } from "firebase/firestore";
 import { db, auth } from "../firebase";
-import PostCard from "./PostCard";
+import PolaroidFlipCard from "../components/PolaroidFlipCard";
+import { DEFAULT_GRADUATION_MEMORIES } from "../data/defaultMemories";
+import { Sparkles, Camera, Filter } from "lucide-react";
 import "./postlist.css";
+
+const MOOD_FILTERS = [
+  "All Frames",
+  "CORE MEMORY",
+  "MIDNIGHT LAB",
+  "SENIOR CAPSTONE",
+  "CAMPUS QUAD",
+  "FORMAL GALA",
+];
 
 export default function PostList({
   roomId,
   onDelete,
-  onEdit,
-  showPlaceholder = true,
-  background,
+  onEditPost,
 }) {
   const [posts, setPosts] = useState([]);
-  const uid = auth.currentUser.uid;
+  const [selectedMood, setSelectedMood] = useState("All Frames");
+  const uid = auth.currentUser?.uid;
 
   useEffect(() => {
+    if (!roomId) return;
     const q = query(collection(db, "rooms", roomId, "posts"));
     return onSnapshot(q, (snap) => {
       const arr = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-      setPosts(
-        arr.sort((a, b) => b.createdAt?.toMillis() - a.createdAt?.toMillis())
-      );
+      const sorted = arr.sort((a, b) => (b.createdAt?.toMillis?.() || b.updatedAt || 0) - (a.createdAt?.toMillis?.() || a.updatedAt || 0));
+
+      // Strict Deduplication by post ID and image URL
+      const seenIds = new Set();
+      const seenImages = new Set();
+      const uniquePosts = [];
+
+      for (const p of sorted) {
+        const imgKey = p.imageUrls?.[0];
+        if (seenIds.has(p.id)) continue;
+        if (imgKey && seenImages.has(imgKey)) continue;
+
+        seenIds.add(p.id);
+        if (imgKey) seenImages.add(imgKey);
+        uniquePosts.push(p);
+      }
+
+      if (uniquePosts.length === 0) {
+        setPosts(DEFAULT_GRADUATION_MEMORIES);
+      } else {
+        setPosts(uniquePosts);
+      }
     });
   }, [roomId]);
 
-  const handleReact = async (postId, emoji) => {
-    const post = posts.find((p) => p.id === postId);
-    const reactions = { ...(post.reactions || {}) };
-
-    if (reactions[uid] === emoji) {
-      delete reactions[uid]; // remove reaction if clicked again
-    } else {
-      reactions[uid] = emoji; // assign new reaction
-    }
-
-    await updateDoc(doc(db, "rooms", roomId, "posts", postId), { reactions });
-  };
-
   const handleDelete = async (postId) => {
-    await deleteDoc(doc(db, "rooms", roomId, "posts", postId));
-    onDelete?.();
+    if (postId?.startsWith?.("mem-")) {
+      setPosts((prev) => prev.filter((p) => p.id !== postId));
+      return;
+    }
+    if (!window.confirm("Remove this memory from the yearbook?")) return;
+    try {
+      await deleteDoc(doc(db, "rooms", roomId, "posts", postId));
+      onDelete?.();
+    } catch (err) {
+      alert("Error deleting memory: " + err.message);
+    }
   };
+
+  const filteredPosts = posts.filter((p) => {
+    if (selectedMood === "All Frames") return true;
+    return (p.stamp || "CORE MEMORY") === selectedMood;
+  });
 
   return (
     <div className="postlist-container">
-      {posts.length === 0 && showPlaceholder ? (
-        <div className="empty-state-container animate-fade-in">
-          <div className="sparkle-icon">✨</div>
-          <h2 className="empty-title">A Silent Chapter</h2>
-          <p className="empty-subtitle">
-            Be the first to leave your mark on this digital archive.
-          </p>
+      {/* Mood / Chapter Filter Bar */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+          {MOOD_FILTERS.map((mood) => (
+            <button
+              key={mood}
+              className={`dept-chip ${selectedMood === mood ? "active" : ""}`}
+              onClick={() => setSelectedMood(mood)}
+              style={{ fontFamily: mood !== "All Frames" ? "'Courier New', monospace" : "inherit" }}
+            >
+              {mood}
+            </button>
+          ))}
         </div>
-      ) : (
-        <>
-          <div className="feed-header animate-fade-in">
-            <h2 className="feed-title">Room Memories</h2>
-            <div className="feed-stats">
-              <span>{posts.length} Stories Captured</span>
-            </div>
-          </div>
 
-          <div className="posts-grid">
-            {posts.map((p) => {
-              const userEmoji = p.reactions?.[uid] || "";
-              const counts = { "👍": 0, "❤️": 0, "😂": 0, "😢": 0 };
-              Object.values(p.reactions || {}).forEach((e) => {
-                if (counts[e] !== undefined) counts[e]++;
-              });
+        <div style={{ fontSize: "0.8125rem", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: 6 }}>
+          <Camera size={14} color="var(--gold-primary)" />
+          <span>{filteredPosts.length} Polaroids Preserved</span>
+        </div>
+      </div>
 
-              return (
-                <PostCard
-                  key={p.id}
-                  post={p}
-                  userEmoji={userEmoji}
-                  emojiCounts={counts}
-                  canEdit={p.authorId === uid}
-                  onReact={(emoji) => handleReact(p.id, emoji)}
-                  onDelete={() => handleDelete(p.id)}
-                  onEdit={() => onEdit(p)}
-                />
-              );
-            })}
-          </div>
-        </>
-      )}
+      {/* Asymmetrical 3D Polaroid Memory Wall */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+          gap: "36px 24px",
+          padding: "16px 0 40px",
+        }}
+      >
+        {filteredPosts.map((p, idx) => (
+          <PolaroidFlipCard
+            key={p.id}
+            post={p}
+            roomId={roomId}
+            idx={idx}
+            onDelete={handleDelete}
+            onEdit={onEditPost}
+          />
+        ))}
+      </div>
     </div>
   );
 }

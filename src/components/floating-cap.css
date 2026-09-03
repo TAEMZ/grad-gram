@@ -1,0 +1,63 @@
+/* ==========================================================================
+   GradGram Unboxed Floating 3D Cap Ceremony Styles (Zero Cards / Zero Boxes)
+   ========================================================================== */
+
+.floating-cap-stage-unboxed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px 40px;
+  position: relative;
+  perspective: 1200px;
+  width: 100%;
+}
+
+/* Standalone Floating Cap Container */
+.floating-cap-entity-wrapper {
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.7));
+  transition: filter 0.25s ease;
+  user-select: none;
+}
+
+.floating-cap-entity-wrapper:hover {
+  filter: drop-shadow(0 24px 38px rgba(229, 184, 105, 0.45));
+}
+
+/* Floating Clean Counter Below Cap */
+.floating-cap-clean-counter {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.floating-cap-number {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.floating-cap-subtext {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Flying Launch Particles */
+.flying-cap-sky-particle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 80;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.8));
+}
