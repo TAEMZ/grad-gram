@@ -140,3 +140,36 @@
   font-size: 0.75rem;
   color: var(--slate-300);
 }
+
+/* ==========================================================================
+   Mobile Responsiveness for Alumni Relocation Map
+   ========================================================================== */
+@media (max-width: 768px) {
+  .city-hubs-grid {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .city-hub-card {
+    padding: 10px 12px;
+  }
+
+  .city-hub-name {
+    font-size: 0.8125rem;
+  }
+
+  .city-hub-count {
+    font-size: 0.6875rem;
+    padding: 2px 6px;
+  }
+
+  .alumni-peers-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .alumni-peer-card {
+    padding: 16px;
+  }
+}

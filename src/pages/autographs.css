@@ -230,3 +230,41 @@
   border-color: var(--gold-primary);
   transform: scale(1.15);
 }
+
+/* ==========================================================================
+   Mobile Responsiveness for Autographs & Peer Walls
+   ========================================================================== */
+@media (max-width: 768px) {
+  .autographs-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .autographs-header button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .wall-selector-strip {
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+  }
+
+  .wall-selector-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .autographs-board {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 10px 0;
+  }
+
+  .autograph-composer-card {
+    padding: 20px 16px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}

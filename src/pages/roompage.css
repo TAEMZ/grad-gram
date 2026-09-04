@@ -375,9 +375,49 @@
 
 @media (max-width: 768px) {
   .room-hero-banner {
-    padding: 16px 20px;
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
   }
+
+  .room-hero-left {
+    gap: 12px;
+  }
+
+  .room-hero-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .room-hero-titles h1 {
+    font-size: 1.25rem !important;
+  }
+
+  .room-hero-titles h2 {
+    font-size: 0.75rem;
+  }
+
+  /* Action buttons row */
+  .room-hero-banner > div:last-child {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    gap: 8px !important;
+  }
+
+  .room-hero-banner > div:last-child::-webkit-scrollbar {
+    display: none;
+  }
+
   .room-viewport-content {
-    padding: 20px 16px;
+    padding: 14px 10px;
+  }
+
+  .room-sidebar {
+    width: 85vw;
+    max-width: 300px;
   }
 }

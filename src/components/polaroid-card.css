@@ -269,3 +269,24 @@
 .rubber-ink-stamp.gold {
   color: #b45309;
 }
+
+/* ==========================================================================
+   Mobile Responsiveness for Polaroid Cards
+   ========================================================================== */
+@media (max-width: 768px) {
+  .polaroid-flip-stage {
+    max-width: 100%;
+  }
+
+  .polaroid-card-3d {
+    min-height: 420px;
+  }
+
+  .polaroid-photo-frame {
+    height: 240px;
+  }
+
+  .polaroid-caption-text {
+    font-size: 1.25rem;
+  }
+}

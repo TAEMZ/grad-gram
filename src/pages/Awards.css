@@ -109,3 +109,45 @@
   border-radius: 9999px;
   border: 1px solid rgba(229, 184, 105, 0.2);
 }
+
+/* ==========================================================================
+   Mobile Responsiveness for Awards & Superlatives
+   ========================================================================== */
+@media (max-width: 768px) {
+  .categories-list {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+  }
+
+  .categories-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-pill {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    padding: 6px 14px;
+  }
+
+  .nominees-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .nominee-card {
+    padding: 16px 12px;
+  }
+
+  .nominee-avatar-img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .nominee-name {
+    font-size: 0.9375rem;
+  }
+}

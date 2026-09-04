@@ -127,3 +127,49 @@
   border-radius: var(--radius-md);
   border-left: 3px solid var(--gold-primary);
 }
+
+/* ==========================================================================
+   Mobile Responsiveness for Time Capsule Vault
+   ========================================================================== */
+@media (max-width: 768px) {
+  .vault-hero-card {
+    padding: 24px 16px;
+    margin-bottom: 24px;
+  }
+
+  .vault-hero-card h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .reunion-countdown-strip {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .reunion-time-unit {
+    min-width: 65px;
+    padding: 8px 10px;
+    flex: 1 1 65px;
+  }
+
+  .reunion-val {
+    font-size: 1.35rem;
+  }
+
+  .reunion-lbl {
+    font-size: 0.625rem;
+  }
+
+  .predictions-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .prediction-card {
+    padding: 16px;
+  }
+
+  .prediction-quote {
+    font-size: 0.8125rem;
+  }
+}

@@ -581,3 +581,74 @@
   color: var(--text-secondary);
   margin-bottom: 20px;
 }
+
+/* ==========================================================================
+   Comprehensive Mobile Dashboard Responsiveness
+   ========================================================================== */
+@media (max-width: 768px) {
+  .dashboard-main {
+    padding: 16px 14px 40px;
+  }
+
+  .dashboard-hero-header {
+    margin-bottom: 20px;
+  }
+
+  .dashboard-hero-header h1 {
+    font-size: 1.5rem !important;
+  }
+
+  .dashboard-hero-header p {
+    font-size: 0.8125rem;
+  }
+
+  .archival-search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .search-input-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .department-chips-row {
+    width: 100%;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+
+  .department-chips-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .archival-tab-switch {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .archival-tab-switch::-webkit-scrollbar {
+    display: none;
+  }
+
+  .archival-tab-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .archival-folios-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .archival-cohort-folio {
+    min-height: auto;
+    padding: 20px 18px 16px;
+  }
+}
