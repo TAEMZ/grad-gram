@@ -43,6 +43,7 @@ export default function DarkroomComposer({
   const [selectedTape, setSelectedTape] = useState("gold");
   const [selectedStamp, setSelectedStamp] = useState("CORE MEMORY");
   const fileInputRef = useRef(null);
+  const currentUser = auth.currentUser;
 
   // Pre-fill fields if editing an existing post
   useEffect(() => {

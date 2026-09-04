@@ -41,7 +41,8 @@ export default function PolaroidFlipCard({
 
   const clean = (s) => (s || "").toLowerCase().replace(/[\s\-_.]/g, "");
 
-  const cleanUid = currentUser?.uid;
+  const uid = currentUser?.uid;
+  const cleanUid = clean(uid);
   const cleanEmail = clean(currentUser?.email);
   const cleanName = clean(currentUser?.displayName);
 
